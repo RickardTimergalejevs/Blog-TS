@@ -1,0 +1,11 @@
+POST http://localhost:3000/api/posts
+Content-Type: application/json
+
+{
+    "title": "En titel",
+    "content": "Litte content",
+    "user": "6405d6f108f7f88911a97212"
+}
+
+###
+GET http://localhost:3000/api/posts

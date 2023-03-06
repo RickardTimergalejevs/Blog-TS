@@ -1,0 +1,45 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    background-color: aquamarine;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.login_form input, 
+.post_form input {
+    height: 3rem;
+    width: 20rem;
+    font-size: 20px;
+    margin-bottom: 1rem;
+}
+
+.login_form button, 
+.post_form button {
+    height: 3rem;
+    width: 8rem;
+    background-color: blueviolet;
+    border: none;
+    color: white;
+    font-size: 20px;
+    padding: 0.5rem;
+}
+
+.post_form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#post_content {
+    font-size: 20px;
+    margin-bottom: 1rem;
+}
