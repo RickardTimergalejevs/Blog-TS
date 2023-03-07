@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { addLike, getLikes } from "./likes.js";
+import { addLike, getLikes, hideLikes, showLikes } from "./likes.js";
 import { getUserFromLs } from "./users.js";
 const postTitleInput = document.querySelector(".post_form input");
 const postContentInput = document.querySelector("#post_content");
@@ -54,20 +54,24 @@ const printPosts = (posts) => __awaiter(void 0, void 0, void 0, function* () {
         const likes = yield getLikes(post._id);
         const likesUp = likes.filter((like) => like.type === "like");
         const likesDown = likes.filter((like) => like.type === "dislike");
-        const alreadyLiked = likes.find((like) => like.user == (user === null || user === void 0 ? void 0 : user.id));
+        const alreadyLiked = likes.find((like) => like.user.id == (user === null || user === void 0 ? void 0 : user.id));
         const thumbsDown = document.createElement("i");
         thumbsDown.classList.add("thumbs_down", "fa-regular", "fa-thumbs-down");
         if (user && !alreadyLiked) {
             thumbsUp.addEventListener("click", () => addLike("like", post._id));
             thumbsDown.addEventListener("click", () => addLike("dislike", post._id));
         }
+        thumbsUp.addEventListener("mouseenter", (e) => showLikes(e, likesUp));
+        thumbsUp.addEventListener("mouseleave", hideLikes);
+        thumbsDown.addEventListener("mouseenter", (e) => showLikes(e, likesDown));
+        thumbsDown.addEventListener("mouseleave", hideLikes);
         title.innerText = post.title;
         content.innerText = post.content;
         name.innerText = post.user.username;
         date.innerText = post.createdAt ? post.createdAt.toString() : "";
         postContainer.append(title, content, name, date);
-        thumbsUp.insertAdjacentText("beforeend", likesUp.length);
-        thumbsDown.insertAdjacentText("beforeend", likesDown.length);
+        thumbsUp.insertAdjacentText("beforeend", likesUp.length.toString());
+        thumbsDown.insertAdjacentText("beforeend", likesDown.length.toString());
         postContainer.append(thumbsUp, thumbsDown);
         postList.appendChild(postContainer);
     }

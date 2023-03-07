@@ -27,3 +27,9 @@ export interface Like {
     type: LikeType,
     post: string
 }
+
+export interface PopulatedLike {
+    user: User,
+    type: LikeType,
+    post: string
+}

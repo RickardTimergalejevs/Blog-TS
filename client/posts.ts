@@ -1,5 +1,5 @@
-import { Post, PopulatedPost, Like } from "./interfaces"
-import { addLike, getLikes } from "./likes.js"
+import { Post, PopulatedPost, Like, PopulatedLike } from "./interfaces"
+import { addLike, getLikes, hideLikes, showLikes } from "./likes.js"
 import { getUserFromLs } from "./users.js"
 
 const postTitleInput = document.querySelector(".post_form input") as HTMLInputElement
@@ -55,10 +55,10 @@ const printPosts = async (posts: PopulatedPost[]) => {
         const thumbsUp = document.createElement("i")
         thumbsUp.classList.add("thumbs_up", "fa-regular", "fa-thumbs-up")
 
-        const likes = await getLikes(post._id)
-        const likesUp = likes.filter((like: Like) => like.type === "like")
-        const likesDown = likes.filter((like: Like) => like.type === "dislike")
-        const alreadyLiked = likes.find((like: Like) => like.user == user?.id)
+        const likes: PopulatedLike[] = await getLikes(post._id)
+        const likesUp = likes.filter((like: PopulatedLike) => like.type === "like")
+        const likesDown = likes.filter((like: PopulatedLike) => like.type === "dislike")
+        const alreadyLiked = likes.find((like: PopulatedLike) => like.user.id == user?.id)
         const thumbsDown = document.createElement("i")
         thumbsDown.classList.add("thumbs_down", "fa-regular", "fa-thumbs-down")
 
@@ -67,7 +67,11 @@ const printPosts = async (posts: PopulatedPost[]) => {
             thumbsDown.addEventListener("click", () => addLike("dislike", post._id))
         }
 
-        
+        thumbsUp.addEventListener("mouseenter", (e) => showLikes(e, likesUp))
+        thumbsUp.addEventListener("mouseleave", hideLikes)
+
+        thumbsDown.addEventListener("mouseenter", (e) => showLikes(e, likesDown))
+        thumbsDown.addEventListener("mouseleave", hideLikes)
 
         title.innerText = post.title
         content.innerText = post.content
@@ -76,8 +80,8 @@ const printPosts = async (posts: PopulatedPost[]) => {
         
         postContainer.append(title, content, name, date)
 
-        thumbsUp.insertAdjacentText("beforeend", likesUp.length)
-        thumbsDown.insertAdjacentText("beforeend", likesDown.length)
+        thumbsUp.insertAdjacentText("beforeend", likesUp.length.toString())
+        thumbsDown.insertAdjacentText("beforeend", likesDown.length.toString())
 
         postContainer.append(thumbsUp, thumbsDown)
 

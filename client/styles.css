@@ -43,6 +43,7 @@ body {
 #post_content {
     font-size: 20px;
     margin-bottom: 1rem;
+    resize: none;
 }
 
 .post_list {
@@ -80,6 +81,7 @@ body {
 .thumbs_down {
     font-size: 24px;
     margin-right: 1rem;
+    cursor: pointer;
 }
 
 .thumbs_up::before, 
@@ -90,4 +92,18 @@ body {
 .greeting_message {
     margin-bottom: 3rem;
     color: brown;
+}
+
+.likes_list {
+    display: none;
+    position: absolute;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: white;
+    padding: 1rem;
+}
+
+.likes_list ul {
+    list-style-type: none;
+    font-size: 20px;
 }

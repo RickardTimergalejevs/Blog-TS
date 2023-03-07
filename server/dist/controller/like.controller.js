@@ -20,7 +20,7 @@ const addLike = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.addLike = addLike;
 const getLikesByPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const likes = yield like_model_1.default.find({ post: req.params.postId });
+    const likes = yield like_model_1.default.find({ post: req.params.postId }).populate("user");
     res.status(200).json(likes);
 });
 exports.getLikesByPost = getLikesByPost;

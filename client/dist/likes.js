@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { getPosts } from "./posts.js";
 import { getUserFromLs } from "./users.js";
+const likesList = document.querySelector(".likes_list");
 export const addLike = (type, postId) => __awaiter(void 0, void 0, void 0, function* () {
     const user = getUserFromLs();
     const like = {
@@ -30,3 +31,20 @@ export const getLikes = (postId) => __awaiter(void 0, void 0, void 0, function* 
     const data = yield response.json();
     return data;
 });
+export const showLikes = (e, likes) => {
+    if (likes.length > 0) {
+        const likesListUl = document.querySelector(".likes_list ul");
+        likesListUl.innerHTML = "";
+        likesList.style.display = "block";
+        likesList.style.top = e.pageY + 30 + "px";
+        likesList.style.left = e.pageX + 30 + "px";
+        for (const like of likes) {
+            const li = document.createElement("li");
+            li.innerText = like.user.username;
+            likesListUl.appendChild(li);
+        }
+    }
+};
+export const hideLikes = () => {
+    likesList.style.display = "none";
+};

@@ -1,6 +1,8 @@
-import { LikeType } from "./interfaces"
+import { LikeType, Like, PopulatedLike } from "./interfaces"
 import { getPosts } from "./posts.js";
 import { getUserFromLs } from "./users.js";
+
+const likesList = document.querySelector(".likes_list") as HTMLDivElement
 
 export const addLike = async (type: LikeType, postId: string) => {
     const user = getUserFromLs()
@@ -26,4 +28,27 @@ export const getLikes = async (postId: string) => {
     const data = await response.json()
 
     return data
+}
+
+export const showLikes = (e: MouseEvent, likes: PopulatedLike[]) => {
+
+    if(likes.length > 0) {
+    const likesListUl = document.querySelector(".likes_list ul") as HTMLUListElement
+
+    likesListUl.innerHTML = ""
+
+    likesList.style.display = "block"
+    likesList.style.top = e.pageY + 30 + "px"
+    likesList.style.left = e.pageX + 30 + "px"
+
+    for (const like of likes) {
+        const li = document.createElement("li")
+        li.innerText = like.user.username
+        likesListUl.appendChild(li)
+    }
+    }
+}
+
+export const hideLikes = () => {
+    likesList.style.display = "none"
 }

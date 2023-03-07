@@ -7,7 +7,7 @@ const addLike = async (req: Request, res: Response) => {
 }
 
 const getLikesByPost = async (req: Request, res: Response) => {
-    const likes = await LikeModel.find({ post: req.params.postId })
+    const likes = await LikeModel.find({ post: req.params.postId }).populate("user")
     res.status(200).json(likes)
 }
 
