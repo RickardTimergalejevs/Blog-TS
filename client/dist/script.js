@@ -74,6 +74,7 @@ const getPosts = () => __awaiter(void 0, void 0, void 0, function* () {
 });
 const printPosts = (posts) => {
     postList.innerHTML = "";
+    posts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
     for (const post of posts) {
         const postContainer = document.createElement("div");
         const title = document.createElement("h4");
@@ -83,7 +84,7 @@ const printPosts = (posts) => {
         title.innerText = post.title;
         content.innerText = post.content;
         name.innerText = post.user.username;
-        date.innerText = post.createdAt ? post.createdAt : "";
+        date.innerText = post.createdAt ? post.createdAt.toString() : "";
         postContainer.append(title, content, name, date);
         postList.appendChild(postContainer);
     }
