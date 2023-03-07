@@ -1,4 +1,5 @@
 import { User } from "./interfaces"
+import { getPosts } from "./posts.js"
 
 const loginForm = document.querySelector(".login_form") as HTMLDivElement
 const greetingMessage = document.querySelector(".greeting_message") as HTMLHeadingElement
@@ -11,7 +12,7 @@ const getUserFromLs = (): User | undefined => {
         return user = JSON.parse(toParse)
     }
 
-    return user
+    return
 }
 
 const isLoggedIn = () => {
@@ -46,6 +47,7 @@ const login = async (username: string) => {
     const data = await response.json()
     localStorage.setItem("user", JSON.stringify(data))
     isLoggedIn()
+    getPosts()
 }
 
 export { isLoggedIn, login, getUserFromLs }

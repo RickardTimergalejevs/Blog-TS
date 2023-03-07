@@ -8,6 +8,7 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const cors_1 = __importDefault(require("cors"));
 const user_route_1 = __importDefault(require("./routes/user.route"));
 const post_route_1 = __importDefault(require("./routes/post.route"));
+const like_route_1 = __importDefault(require("./routes/like.route"));
 const app = (0, express_1.default)();
 //Middlewares
 app.use(express_1.default.json());
@@ -15,6 +16,7 @@ app.use((0, cors_1.default)());
 //Routes
 app.use("/api/users", user_route_1.default);
 app.use("/api/posts", post_route_1.default);
+app.use("/api/likes", like_route_1.default);
 //Connect to DB
 const initApp = () => {
     mongoose_1.default.set("strictQuery", false);

@@ -3,6 +3,7 @@ import mongoose from "mongoose"
 import cors from "cors"
 import userRouter from "./routes/user.route"
 import postRouter from "./routes/post.route"
+import likeRouter from "./routes/like.route"
 const app = express()
 
 //Middlewares
@@ -12,6 +13,7 @@ app.use(cors())
 //Routes
 app.use("/api/users", userRouter)
 app.use("/api/posts", postRouter)
+app.use("/api/likes", likeRouter)
 
 //Connect to DB
 const initApp = () => {

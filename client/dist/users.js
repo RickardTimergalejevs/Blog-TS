@@ -7,6 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+import { getPosts } from "./posts.js";
 const loginForm = document.querySelector(".login_form");
 const greetingMessage = document.querySelector(".greeting_message");
 const getUserFromLs = () => {
@@ -15,7 +16,7 @@ const getUserFromLs = () => {
     if (toParse) {
         return user = JSON.parse(toParse);
     }
-    return user;
+    return;
 };
 const isLoggedIn = () => {
     let user;
@@ -43,5 +44,6 @@ const login = (username) => __awaiter(void 0, void 0, void 0, function* () {
     const data = yield response.json();
     localStorage.setItem("user", JSON.stringify(data));
     isLoggedIn();
+    getPosts();
 });
 export { isLoggedIn, login, getUserFromLs };

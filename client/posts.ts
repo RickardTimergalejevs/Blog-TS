@@ -1,5 +1,5 @@
-import { Post, PopulatedPost } from "./interfaces"
-import { addLike } from "./likes.js"
+import { Post, PopulatedPost, Like } from "./interfaces"
+import { addLike, getLikes } from "./likes.js"
 import { getUserFromLs } from "./users.js"
 
 const postTitleInput = document.querySelector(".post_form input") as HTMLInputElement
@@ -39,11 +39,10 @@ export const getPosts = async () => {
     printPosts(posts)
 }
 
-const printPosts = (posts: PopulatedPost[]) => {
+const printPosts = async (posts: PopulatedPost[]) => {
     postList.innerHTML = ""
     const user = getUserFromLs()
 
-    if(user) {
         posts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
 
     for (const post of posts) {
@@ -55,19 +54,26 @@ const printPosts = (posts: PopulatedPost[]) => {
 
         const thumbsUp = document.createElement("i")
         thumbsUp.classList.add("thumbs_up", "fa-regular", "fa-thumbs-up")
-        thumbsUp.addEventListener("click", () => addLike("like", user.id, post._id))
+        thumbsUp.addEventListener("click", () => addLike("like", post._id))
 
         const thumbsDown = document.createElement("i")
         thumbsDown.classList.add("thumbs_down", "fa-regular", "fa-thumbs-down")
-        thumbsDown.addEventListener("click", () => console.log("Tumme Ner"))
+        thumbsDown.addEventListener("click", () => addLike("dislike", post._id))
 
         title.innerText = post.title
         content.innerText = post.content
         name.innerText = post.user.username
         date.innerText = post.createdAt ? post.createdAt.toString() : ""
         
-        postContainer.append(title, content, name, date, thumbsUp, thumbsDown)
+        postContainer.append(title, content, name, date)
+
+        const likes = await getLikes(post._id)
+        const alreadyLiked = likes.find((like: Like) => like.user == user?.id)
+
+        if (user && !alreadyLiked) {
+            postContainer.append(thumbsUp, thumbsDown)
+        }
+
         postList.appendChild(postContainer)
-    }
     }
 }

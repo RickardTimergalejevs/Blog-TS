@@ -21,3 +21,9 @@ export interface PopulatedPost {
 }
 
 export type LikeType = "like" | "dislike"
+
+export interface Like {
+    user: string,
+    type: LikeType,
+    post: string
+}
