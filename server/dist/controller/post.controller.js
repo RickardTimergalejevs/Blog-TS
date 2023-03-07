@@ -20,7 +20,7 @@ const addPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.addPost = addPost;
 const getAllPosts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const posts = yield post_model_1.default.find({});
+    const posts = yield post_model_1.default.find({}).populate("user");
     if (!posts) {
         return res.status(404).json("No posts found");
     }

@@ -78,11 +78,13 @@ const printPosts = (posts) => {
         const postContainer = document.createElement("div");
         const title = document.createElement("h4");
         const content = document.createElement("p");
+        const name = document.createElement("p");
         const date = document.createElement("p");
         title.innerText = post.title;
         content.innerText = post.content;
+        name.innerText = post.user.username;
         date.innerText = post.createdAt ? post.createdAt : "";
-        postContainer.append(title, content, date);
+        postContainer.append(title, content, name, date);
         postList.appendChild(postContainer);
     }
 };

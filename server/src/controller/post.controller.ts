@@ -7,7 +7,7 @@ const addPost = async (req: Request, res: Response) => {
 }
 
 const getAllPosts = async (req: Request, res: Response) => {
-    const posts = await PostModel.find({})
+    const posts = await PostModel.find({}).populate("user")
     
     if(!posts) {
         return res.status(404).json("No posts found")

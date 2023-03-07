@@ -57,6 +57,14 @@ interface Post {
     createdAt?: string
 }
 
+interface GetPost {
+    title: string,
+    content: string,
+    user: User,
+    createdAt?: string
+}
+
+
 const addPost = async () => {
 
     const toParse = localStorage.getItem("user")
@@ -96,20 +104,22 @@ const getPosts = async () => {
     printPosts(posts)
 }
 
-const printPosts = (posts: Post[]) => {
+const printPosts = (posts: GetPost[]) => {
     postList.innerHTML = ""
 
     for (const post of posts) {
         const postContainer = document.createElement("div")
         const title = document.createElement("h4")
         const content = document.createElement("p")
+        const name = document.createElement("p")
         const date = document.createElement("p")
 
         title.innerText = post.title
         content.innerText = post.content
+        name.innerText = post.user.username
         date.innerText = post.createdAt ? post.createdAt: ""
-
-        postContainer.append(title, content, date)
+        
+        postContainer.append(title, content, name, date)
         postList.appendChild(postContainer)
     }
 }
