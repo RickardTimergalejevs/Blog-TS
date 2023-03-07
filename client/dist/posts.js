@@ -51,20 +51,24 @@ const printPosts = (posts) => __awaiter(void 0, void 0, void 0, function* () {
         const date = document.createElement("p");
         const thumbsUp = document.createElement("i");
         thumbsUp.classList.add("thumbs_up", "fa-regular", "fa-thumbs-up");
-        thumbsUp.addEventListener("click", () => addLike("like", post._id));
+        const likes = yield getLikes(post._id);
+        const likesUp = likes.filter((like) => like.type === "like");
+        const likesDown = likes.filter((like) => like.type === "dislike");
+        const alreadyLiked = likes.find((like) => like.user == (user === null || user === void 0 ? void 0 : user.id));
         const thumbsDown = document.createElement("i");
         thumbsDown.classList.add("thumbs_down", "fa-regular", "fa-thumbs-down");
-        thumbsDown.addEventListener("click", () => addLike("dislike", post._id));
+        if (user && !alreadyLiked) {
+            thumbsUp.addEventListener("click", () => addLike("like", post._id));
+            thumbsDown.addEventListener("click", () => addLike("dislike", post._id));
+        }
         title.innerText = post.title;
         content.innerText = post.content;
         name.innerText = post.user.username;
         date.innerText = post.createdAt ? post.createdAt.toString() : "";
         postContainer.append(title, content, name, date);
-        const likes = yield getLikes(post._id);
-        const alreadyLiked = likes.find((like) => like.user == (user === null || user === void 0 ? void 0 : user.id));
-        if (user && !alreadyLiked) {
-            postContainer.append(thumbsUp, thumbsDown);
-        }
+        thumbsUp.insertAdjacentText("beforeend", likesUp.length);
+        thumbsDown.insertAdjacentText("beforeend", likesDown.length);
+        postContainer.append(thumbsUp, thumbsDown);
         postList.appendChild(postContainer);
     }
 });

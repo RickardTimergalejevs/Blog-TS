@@ -54,11 +54,20 @@ const printPosts = async (posts: PopulatedPost[]) => {
 
         const thumbsUp = document.createElement("i")
         thumbsUp.classList.add("thumbs_up", "fa-regular", "fa-thumbs-up")
-        thumbsUp.addEventListener("click", () => addLike("like", post._id))
 
+        const likes = await getLikes(post._id)
+        const likesUp = likes.filter((like: Like) => like.type === "like")
+        const likesDown = likes.filter((like: Like) => like.type === "dislike")
+        const alreadyLiked = likes.find((like: Like) => like.user == user?.id)
         const thumbsDown = document.createElement("i")
         thumbsDown.classList.add("thumbs_down", "fa-regular", "fa-thumbs-down")
-        thumbsDown.addEventListener("click", () => addLike("dislike", post._id))
+
+        if(user && !alreadyLiked) {
+            thumbsUp.addEventListener("click", () => addLike("like", post._id))
+            thumbsDown.addEventListener("click", () => addLike("dislike", post._id))
+        }
+
+        
 
         title.innerText = post.title
         content.innerText = post.content
@@ -67,12 +76,10 @@ const printPosts = async (posts: PopulatedPost[]) => {
         
         postContainer.append(title, content, name, date)
 
-        const likes = await getLikes(post._id)
-        const alreadyLiked = likes.find((like: Like) => like.user == user?.id)
+        thumbsUp.insertAdjacentText("beforeend", likesUp.length)
+        thumbsDown.insertAdjacentText("beforeend", likesDown.length)
 
-        if (user && !alreadyLiked) {
-            postContainer.append(thumbsUp, thumbsDown)
-        }
+        postContainer.append(thumbsUp, thumbsDown)
 
         postList.appendChild(postContainer)
     }

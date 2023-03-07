@@ -81,3 +81,13 @@ body {
     font-size: 24px;
     margin-right: 1rem;
 }
+
+.thumbs_up::before, 
+.thumbs_down::before {
+    margin-right: 0.5rem;
+}
+
+.greeting_message {
+    margin-bottom: 3rem;
+    color: brown;
+}
