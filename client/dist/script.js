@@ -11,4 +11,5 @@ const initApp = () => {
 loginBtn.addEventListener("click", () => login(loginInput.value));
 //HANDLE POSTS
 newPostBtn.addEventListener("click", addPost);
+//HANDLE LIKES
 initApp();

@@ -2,6 +2,17 @@ import { User } from "./interfaces"
 
 const loginForm = document.querySelector(".login_form") as HTMLDivElement
 
+const getUserFromLs = (): User | undefined => {
+    const toParse = localStorage.getItem("user")
+    let user: User = { username: "", id: ""}
+
+    if (toParse) {
+        return user = JSON.parse(toParse)
+    }
+
+    return user
+}
+
 const isLoggedIn = () => {
     let user: User
 
@@ -30,4 +41,4 @@ const login = async (username: string) => {
     isLoggedIn()
 }
 
-export { isLoggedIn, login }
+export { isLoggedIn, login, getUserFromLs }

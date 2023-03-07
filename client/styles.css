@@ -11,7 +11,8 @@ body {
     justify-content: space-around;
     flex-direction: column;
     background-color: aquamarine;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 5rem;
 }
 
 .login_form input, 
@@ -52,7 +53,11 @@ body {
 }
 
 .post_list > div {
-    background-color: rgb(211, 239, 247);
+    background-color: transparent;
+    border-radius: 10px;
+    box-shadow: 2px 2px 8px gray;
+    padding: 1rem;
+    margin-top: 1rem;
 }
 
 .post_list > div h4 {
@@ -69,4 +74,10 @@ body {
     font-size: 14px;
     color: gray;
     margin-bottom: 1rem;
+}
+
+.thumbs_up, 
+.thumbs_down {
+    font-size: 24px;
+    margin-right: 1rem;
 }

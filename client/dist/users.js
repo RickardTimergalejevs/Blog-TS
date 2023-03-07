@@ -8,6 +8,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 const loginForm = document.querySelector(".login_form");
+const getUserFromLs = () => {
+    const toParse = localStorage.getItem("user");
+    let user = { username: "", id: "" };
+    if (toParse) {
+        return user = JSON.parse(toParse);
+    }
+    return user;
+};
 const isLoggedIn = () => {
     let user;
     user = JSON.parse(localStorage.getItem("user"));
@@ -30,4 +38,4 @@ const login = (username) => __awaiter(void 0, void 0, void 0, function* () {
     localStorage.setItem("user", JSON.stringify(data));
     isLoggedIn();
 });
-export { isLoggedIn, login };
+export { isLoggedIn, login, getUserFromLs };
