@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 const loginForm = document.querySelector(".login_form");
+const greetingMessage = document.querySelector(".greeting_message");
 const getUserFromLs = () => {
     const toParse = localStorage.getItem("user");
     let user = { username: "", id: "" };
@@ -24,7 +25,12 @@ const isLoggedIn = () => {
         return false;
     }
     loginForm.style.display = "none";
+    showGreeting(user.username);
     return true;
+};
+const showGreeting = (name) => {
+    greetingMessage.innerText = "Välkommen " + name;
+    greetingMessage.style.display = "block";
 };
 const login = (username) => __awaiter(void 0, void 0, void 0, function* () {
     const response = yield fetch("http://localhost:3000/api/users/login", {

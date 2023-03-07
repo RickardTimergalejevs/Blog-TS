@@ -1,6 +1,7 @@
 import { User } from "./interfaces"
 
 const loginForm = document.querySelector(".login_form") as HTMLDivElement
+const greetingMessage = document.querySelector(".greeting_message") as HTMLHeadingElement
 
 const getUserFromLs = (): User | undefined => {
     const toParse = localStorage.getItem("user")
@@ -24,7 +25,13 @@ const isLoggedIn = () => {
     } 
 
     loginForm.style.display = "none"
+    showGreeting(user.username)
     return true
+}
+
+const showGreeting = (name: string) => {
+    greetingMessage.innerText = "Välkommen " + name
+    greetingMessage.style.display = "block"
 }
 
 const login = async (username: string) => {
