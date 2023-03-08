@@ -54,7 +54,8 @@ const printPosts = (posts) => __awaiter(void 0, void 0, void 0, function* () {
         const likes = yield getLikes(post._id);
         const likesUp = likes.filter((like) => like.type === "like");
         const likesDown = likes.filter((like) => like.type === "dislike");
-        const alreadyLiked = likes.find((like) => like.user.id == (user === null || user === void 0 ? void 0 : user.id));
+        const alreadyLiked = likes.find((like) => like.user._id == (user === null || user === void 0 ? void 0 : user.id));
+        console.log(alreadyLiked);
         const thumbsDown = document.createElement("i");
         thumbsDown.classList.add("thumbs_down", "fa-regular", "fa-thumbs-down");
         if (user && !alreadyLiked) {

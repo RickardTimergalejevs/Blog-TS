@@ -3,6 +3,12 @@ export interface User {
     id: string
 }
 
+//To compare _id with id
+interface UserWith_id {
+    username: string,
+    _id: string
+}
+
 type userId = User | string
 
 export interface Post {
@@ -29,7 +35,7 @@ export interface Like {
 }
 
 export interface PopulatedLike {
-    user: User,
+    user: UserWith_id,
     type: LikeType,
     post: string
 }

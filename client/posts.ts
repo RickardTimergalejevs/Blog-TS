@@ -58,7 +58,9 @@ const printPosts = async (posts: PopulatedPost[]) => {
         const likes: PopulatedLike[] = await getLikes(post._id)
         const likesUp = likes.filter((like: PopulatedLike) => like.type === "like")
         const likesDown = likes.filter((like: PopulatedLike) => like.type === "dislike")
-        const alreadyLiked = likes.find((like: PopulatedLike) => like.user.id == user?.id)
+        const alreadyLiked = likes.find((like: PopulatedLike) => like.user._id == user?.id)
+        console.log(alreadyLiked);
+        
         const thumbsDown = document.createElement("i")
         thumbsDown.classList.add("thumbs_down", "fa-regular", "fa-thumbs-down")
 
