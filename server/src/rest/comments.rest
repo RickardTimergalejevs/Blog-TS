@@ -1,0 +1,11 @@
+POST http://localhost:3000/api/comments
+Content-Type: application/json
+
+{
+    "post": "6405eef1a568d8100b22ded9",
+    "user": "6405d6f108f7f88911a97212",
+    "content": "I like this post!"
+}
+
+###
+GET http://localhost:3000/api/comments/6405eef1a568d8100b22ded9

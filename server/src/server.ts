@@ -4,6 +4,7 @@ import cors from "cors"
 import userRouter from "./routes/user.route"
 import postRouter from "./routes/post.route"
 import likeRouter from "./routes/like.route"
+import commentRouter from "./routes/comment.route"
 const app = express()
 
 //Middlewares
@@ -14,6 +15,7 @@ app.use(cors())
 app.use("/api/users", userRouter)
 app.use("/api/posts", postRouter)
 app.use("/api/likes", likeRouter)
+app.use("/api/comments", commentRouter)
 
 //Connect to DB
 const initApp = () => {
