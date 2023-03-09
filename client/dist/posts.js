@@ -66,16 +66,19 @@ const printPosts = (posts) => __awaiter(void 0, void 0, void 0, function* () {
         thumbsUp.addEventListener("mouseleave", hideLikes);
         thumbsDown.addEventListener("mouseenter", (e) => showLikes(e, likesDown));
         thumbsDown.addEventListener("mouseleave", hideLikes);
-        const comments = yield getComments(post._id);
-        console.log(comments);
         //COMMENTS
-        const commentInput = document.createElement("input");
-        commentInput.className = "comment_input";
-        const commentBtn = document.createElement("button");
-        commentBtn.className = "comment_button";
-        commentBtn.innerText = "Skicka";
-        commentBtn.addEventListener("click", () => addComment(commentInput.value, post._id));
+        const comments = yield getComments(post._id);
         const commentsList = document.createElement("ul");
+        if (user) {
+            const commentInput = document.createElement("input");
+            commentInput.className = "comment_input";
+            const commentBtn = document.createElement("button");
+            commentBtn.className = "comment_button";
+            commentBtn.innerText = "Skicka";
+            commentBtn.addEventListener("click", () => addComment(commentInput.value, post._id));
+            commentsList.insertAdjacentElement("afterbegin", commentBtn);
+            commentsList.insertAdjacentElement("afterbegin", commentInput);
+        }
         showComments(commentsList, comments);
         title.innerText = post.title;
         content.innerText = post.content;
@@ -84,7 +87,7 @@ const printPosts = (posts) => __awaiter(void 0, void 0, void 0, function* () {
         postContainer.append(title, content, name, date);
         thumbsUp.insertAdjacentText("beforeend", likesUp.length.toString());
         thumbsDown.insertAdjacentText("beforeend", likesDown.length.toString());
-        postContainer.append(thumbsUp, thumbsDown, commentInput, commentBtn, commentsList);
+        postContainer.append(thumbsUp, thumbsDown, commentsList);
         postList.appendChild(postContainer);
     }
 });

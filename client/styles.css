@@ -32,6 +32,7 @@ body {
     color: white;
     font-size: 20px;
     padding: 0.5rem;
+    border-radius: 20px;
 }
 
 .post_form {
@@ -66,8 +67,20 @@ body {
     margin-bottom: 1rem;
 }
 
+.post_list > div ul {
+    list-style-type: none;
+}
+
+.post_list > div li {
+    padding: 0.5rem;
+    margin: 1rem 0;
+    background-color: rgb(193, 253, 233);
+    border-radius: 10px;
+    box-shadow: 2px 2px 8px gray;
+}
+
 .post_list > div p:nth-child(2) {
-    font-size: 20px;
+    font-size: 16px;
     margin-bottom: 1rem;
 }
 
@@ -91,7 +104,7 @@ body {
 
 .greeting_message {
     margin-bottom: 3rem;
-    color: brown;
+    color: rgb(14, 49, 47);
 }
 
 .likes_list {
@@ -112,6 +125,7 @@ body {
     border-radius: 10px;
     padding: 0.5rem;
     border: none;
+    margin: 1rem 0;
 }
 
 .comment_button {
@@ -121,4 +135,15 @@ body {
     color: white;
     font-size: 15px;
     margin-left: 1rem;
+    cursor: pointer;
+}
+
+.comment_username {
+    font-size: 16px;
+    color: rgb(19, 63, 57);
+}
+
+.comment_content {
+    font-size: 1px;
+    color: rgb(84, 126, 119);
 }

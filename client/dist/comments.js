@@ -31,12 +31,16 @@ export const getComments = (postId) => __awaiter(void 0, void 0, void 0, functio
     const data = yield response.json();
     return data;
 });
-export const showComments = (app, comments) => {
-    const commentsListUl = document.querySelector(".comments_list ul");
-    //commentsListUl.innerHTML = ""
+export const showComments = (ul, comments) => {
     for (const comment of comments) {
         const li = document.createElement("li");
-        li.innerText = `${comment.user.username} = ${comment.content}`;
-        app.appendChild(li);
+        const username = document.createElement("h3");
+        username.className = "comment_username";
+        const content = document.createElement("p");
+        content.className = "comment_content";
+        username.innerText = comment.user.username;
+        content.innerText = comment.content;
+        li.append(username, content);
+        ul.appendChild(li);
     }
 };

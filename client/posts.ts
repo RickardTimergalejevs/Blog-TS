@@ -75,20 +75,24 @@ const printPosts = async (posts: PopulatedPost[]) => {
         thumbsDown.addEventListener("mouseenter", (e) => showLikes(e, likesDown))
         thumbsDown.addEventListener("mouseleave", hideLikes)
 
-        
-        const comments: Comment[] = await getComments(post._id)
-        console.log(comments);
-        
         //COMMENTS
-        const commentInput = document.createElement("input")
-        commentInput.className = "comment_input"
-        const commentBtn = document.createElement("button")
-        commentBtn.className = "comment_button"
-        commentBtn.innerText = "Skicka"
-
-        commentBtn.addEventListener("click", () => addComment(commentInput.value, post._id))
+        const comments: Comment[] = await getComments(post._id)
 
         const commentsList = document.createElement("ul")
+
+        if(user) {
+            const commentInput = document.createElement("input")
+            commentInput.className = "comment_input"
+            const commentBtn = document.createElement("button")
+            commentBtn.className = "comment_button"
+            commentBtn.innerText = "Skicka"
+
+            commentBtn.addEventListener("click", () => addComment(commentInput.value, post._id))
+
+            commentsList.insertAdjacentElement("afterbegin", commentBtn)
+            commentsList.insertAdjacentElement("afterbegin", commentInput)
+        }
+
         showComments(commentsList, comments)
 
         title.innerText = post.title
@@ -101,7 +105,7 @@ const printPosts = async (posts: PopulatedPost[]) => {
         thumbsUp.insertAdjacentText("beforeend", likesUp.length.toString())
         thumbsDown.insertAdjacentText("beforeend", likesDown.length.toString())
 
-        postContainer.append(thumbsUp, thumbsDown, commentInput, commentBtn, commentsList)
+        postContainer.append(thumbsUp, thumbsDown, commentsList)
 
         postList.appendChild(postContainer)
     }
