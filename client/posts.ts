@@ -1,3 +1,4 @@
+import { addComment } from "./comments.js"
 import { Post, PopulatedPost, Like, PopulatedLike } from "./interfaces"
 import { addLike, getLikes, hideLikes, showLikes } from "./likes.js"
 import { getUserFromLs } from "./users.js"
@@ -59,7 +60,6 @@ const printPosts = async (posts: PopulatedPost[]) => {
         const likesUp = likes.filter((like: PopulatedLike) => like.type === "like")
         const likesDown = likes.filter((like: PopulatedLike) => like.type === "dislike")
         const alreadyLiked = likes.find((like: PopulatedLike) => like.user._id == user?.id)
-        console.log(alreadyLiked);
         
         const thumbsDown = document.createElement("i")
         thumbsDown.classList.add("thumbs_down", "fa-regular", "fa-thumbs-down")
@@ -75,6 +75,14 @@ const printPosts = async (posts: PopulatedPost[]) => {
         thumbsDown.addEventListener("mouseenter", (e) => showLikes(e, likesDown))
         thumbsDown.addEventListener("mouseleave", hideLikes)
 
+        const comment = document.createElement("input")
+        comment.className = "comment_input"
+        const commentBtn = document.createElement("button")
+        commentBtn.className = "comment_button"
+        commentBtn.innerText = "Skicka"
+
+        commentBtn.addEventListener("click", () => addComment(comment.value, post._id))
+
         title.innerText = post.title
         content.innerText = post.content
         name.innerText = post.user.username
@@ -85,7 +93,7 @@ const printPosts = async (posts: PopulatedPost[]) => {
         thumbsUp.insertAdjacentText("beforeend", likesUp.length.toString())
         thumbsDown.insertAdjacentText("beforeend", likesDown.length.toString())
 
-        postContainer.append(thumbsUp, thumbsDown)
+        postContainer.append(thumbsUp, thumbsDown, comment, commentBtn)
 
         postList.appendChild(postContainer)
     }

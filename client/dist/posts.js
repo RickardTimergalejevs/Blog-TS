@@ -7,6 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+import { addComment } from "./comments.js";
 import { addLike, getLikes, hideLikes, showLikes } from "./likes.js";
 import { getUserFromLs } from "./users.js";
 const postTitleInput = document.querySelector(".post_form input");
@@ -55,7 +56,6 @@ const printPosts = (posts) => __awaiter(void 0, void 0, void 0, function* () {
         const likesUp = likes.filter((like) => like.type === "like");
         const likesDown = likes.filter((like) => like.type === "dislike");
         const alreadyLiked = likes.find((like) => like.user._id == (user === null || user === void 0 ? void 0 : user.id));
-        console.log(alreadyLiked);
         const thumbsDown = document.createElement("i");
         thumbsDown.classList.add("thumbs_down", "fa-regular", "fa-thumbs-down");
         if (user && !alreadyLiked) {
@@ -66,6 +66,12 @@ const printPosts = (posts) => __awaiter(void 0, void 0, void 0, function* () {
         thumbsUp.addEventListener("mouseleave", hideLikes);
         thumbsDown.addEventListener("mouseenter", (e) => showLikes(e, likesDown));
         thumbsDown.addEventListener("mouseleave", hideLikes);
+        const comment = document.createElement("input");
+        comment.className = "comment_input";
+        const commentBtn = document.createElement("button");
+        commentBtn.className = "comment_button";
+        commentBtn.innerText = "Skicka";
+        commentBtn.addEventListener("click", () => addComment(comment.value, post._id));
         title.innerText = post.title;
         content.innerText = post.content;
         name.innerText = post.user.username;
@@ -73,7 +79,7 @@ const printPosts = (posts) => __awaiter(void 0, void 0, void 0, function* () {
         postContainer.append(title, content, name, date);
         thumbsUp.insertAdjacentText("beforeend", likesUp.length.toString());
         thumbsDown.insertAdjacentText("beforeend", likesDown.length.toString());
-        postContainer.append(thumbsUp, thumbsDown);
+        postContainer.append(thumbsUp, thumbsDown, comment, commentBtn);
         postList.appendChild(postContainer);
     }
 });

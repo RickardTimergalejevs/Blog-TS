@@ -107,3 +107,18 @@ body {
     list-style-type: none;
     font-size: 20px;
 }
+
+.comment_input, .comment_button {
+    border-radius: 10px;
+    padding: 0.5rem;
+    border: none;
+}
+
+.comment_button {
+    height: 2rem;
+    width: 5rem;
+    background-color: rgb(59, 170, 155);
+    color: white;
+    font-size: 15px;
+    margin-left: 1rem;
+}

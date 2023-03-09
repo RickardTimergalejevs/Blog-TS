@@ -3,7 +3,7 @@ export interface User {
     id: string
 }
 
-//To compare _id with id
+//To compare _id with id (try to do extends)
 interface UserWith_id {
     username: string,
     _id: string
