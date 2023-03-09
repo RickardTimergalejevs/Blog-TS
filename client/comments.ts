@@ -30,7 +30,7 @@ export const getComments = async (postId: string) => {
     return data
 }
 
-export const showComments = (comments: Comment[]) => {
+export const showComments = (app: HTMLUListElement, comments: Comment[]) => {
 
         const commentsListUl = document.querySelector(".comments_list ul") as HTMLUListElement
 
@@ -39,6 +39,6 @@ export const showComments = (comments: Comment[]) => {
         for(const comment of comments) {
             const li = document.createElement("li")
             li.innerText = `${comment.user.username} = ${comment.content}`
-            commentsListUl.appendChild(li)
+            app.appendChild(li)
         }
 }

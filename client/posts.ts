@@ -79,17 +79,17 @@ const printPosts = async (posts: PopulatedPost[]) => {
         const comments: Comment[] = await getComments(post._id)
         console.log(comments);
         
-        const comment = document.createElement("input")
-        comment.className = "comment_input"
+        //COMMENTS
+        const commentInput = document.createElement("input")
+        commentInput.className = "comment_input"
         const commentBtn = document.createElement("button")
         commentBtn.className = "comment_button"
         commentBtn.innerText = "Skicka"
 
-        commentBtn.addEventListener("click", () => addComment(comment.value, post._id))
+        commentBtn.addEventListener("click", () => addComment(commentInput.value, post._id))
 
-        const res = showComments(comments)
-        console.log(res);
-        
+        const commentsList = document.createElement("ul")
+        showComments(commentsList, comments)
 
         title.innerText = post.title
         content.innerText = post.content
@@ -101,7 +101,7 @@ const printPosts = async (posts: PopulatedPost[]) => {
         thumbsUp.insertAdjacentText("beforeend", likesUp.length.toString())
         thumbsDown.insertAdjacentText("beforeend", likesDown.length.toString())
 
-        postContainer.append(thumbsUp, thumbsDown, comment, commentBtn)
+        postContainer.append(thumbsUp, thumbsDown, commentInput, commentBtn, commentsList)
 
         postList.appendChild(postContainer)
     }
