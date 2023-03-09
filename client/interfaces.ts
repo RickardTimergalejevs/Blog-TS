@@ -39,3 +39,9 @@ export interface PopulatedLike {
     type: LikeType,
     post: string
 }
+
+export interface Comment {
+    user: User,
+    post: string,
+    content: string
+}

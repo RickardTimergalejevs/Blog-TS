@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { getUserFromLs } from "./users.js";
 import { getPosts } from "./posts.js";
-const likesList = document.querySelector(".comments_list");
+const commentsList = document.querySelector(".comments_list");
 export const addComment = (content, postId) => __awaiter(void 0, void 0, void 0, function* () {
     const user = getUserFromLs();
     const comment = {
@@ -26,3 +26,17 @@ export const addComment = (content, postId) => __awaiter(void 0, void 0, void 0,
     });
     getPosts();
 });
+export const getComments = (postId) => __awaiter(void 0, void 0, void 0, function* () {
+    const response = yield fetch(`http://localhost:3000/api/comments/${postId}`);
+    const data = yield response.json();
+    return data;
+});
+export const showComments = (comments) => {
+    const commentsListUl = document.querySelector(".comments_list ul");
+    //commentsListUl.innerHTML = ""
+    for (const comment of comments) {
+        const li = document.createElement("li");
+        li.innerText = `${comment.user.username} = ${comment.content}`;
+        commentsListUl.appendChild(li);
+    }
+};

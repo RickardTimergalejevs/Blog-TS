@@ -7,7 +7,7 @@ const addComment = async (req: Request, res: Response) => {
 }
 
 const getCommentsByPost = async (req: Request, res: Response) => {
-    const comments = await CommentModel.find({ post: req.params.postId })
+    const comments = await CommentModel.find({ post: req.params.postId }).populate("user")
     res.status(200).json(comments)
 }
 

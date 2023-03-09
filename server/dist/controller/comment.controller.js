@@ -20,7 +20,7 @@ const addComment = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 });
 exports.addComment = addComment;
 const getCommentsByPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const comments = yield comment_model_1.default.find({ post: req.params.postId });
+    const comments = yield comment_model_1.default.find({ post: req.params.postId }).populate("user");
     res.status(200).json(comments);
 });
 exports.getCommentsByPost = getCommentsByPost;

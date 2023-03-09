@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { addComment } from "./comments.js";
+import { addComment, getComments, showComments } from "./comments.js";
 import { addLike, getLikes, hideLikes, showLikes } from "./likes.js";
 import { getUserFromLs } from "./users.js";
 const postTitleInput = document.querySelector(".post_form input");
@@ -66,12 +66,16 @@ const printPosts = (posts) => __awaiter(void 0, void 0, void 0, function* () {
         thumbsUp.addEventListener("mouseleave", hideLikes);
         thumbsDown.addEventListener("mouseenter", (e) => showLikes(e, likesDown));
         thumbsDown.addEventListener("mouseleave", hideLikes);
+        const comments = yield getComments(post._id);
+        console.log(comments);
         const comment = document.createElement("input");
         comment.className = "comment_input";
         const commentBtn = document.createElement("button");
         commentBtn.className = "comment_button";
         commentBtn.innerText = "Skicka";
         commentBtn.addEventListener("click", () => addComment(comment.value, post._id));
+        const res = showComments(comments);
+        console.log(res);
         title.innerText = post.title;
         content.innerText = post.content;
         name.innerText = post.user.username;

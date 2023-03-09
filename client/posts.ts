@@ -1,5 +1,5 @@
-import { addComment } from "./comments.js"
-import { Post, PopulatedPost, Like, PopulatedLike } from "./interfaces"
+import { addComment, getComments, showComments } from "./comments.js"
+import { Post, PopulatedPost, Like, PopulatedLike, Comment } from "./interfaces"
 import { addLike, getLikes, hideLikes, showLikes } from "./likes.js"
 import { getUserFromLs } from "./users.js"
 
@@ -75,6 +75,10 @@ const printPosts = async (posts: PopulatedPost[]) => {
         thumbsDown.addEventListener("mouseenter", (e) => showLikes(e, likesDown))
         thumbsDown.addEventListener("mouseleave", hideLikes)
 
+        
+        const comments: Comment[] = await getComments(post._id)
+        console.log(comments);
+        
         const comment = document.createElement("input")
         comment.className = "comment_input"
         const commentBtn = document.createElement("button")
@@ -82,6 +86,10 @@ const printPosts = async (posts: PopulatedPost[]) => {
         commentBtn.innerText = "Skicka"
 
         commentBtn.addEventListener("click", () => addComment(comment.value, post._id))
+
+        const res = showComments(comments)
+        console.log(res);
+        
 
         title.innerText = post.title
         content.innerText = post.content
