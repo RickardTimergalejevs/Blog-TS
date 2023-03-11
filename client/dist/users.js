@@ -27,6 +27,7 @@ const isLoggedIn = () => {
     }
     loginForm.style.display = "none";
     showGreeting(user.username);
+    logout();
     return true;
 };
 const showGreeting = (name) => {
@@ -46,4 +47,14 @@ const login = (username) => __awaiter(void 0, void 0, void 0, function* () {
     isLoggedIn();
     getPosts();
 });
+const logout = () => {
+    const logoutBtn = document.createElement("button");
+    logoutBtn.className = "logout_button";
+    logoutBtn.innerText = "Logout";
+    greetingMessage.insertAdjacentElement("beforebegin", logoutBtn);
+    logoutBtn.addEventListener("click", () => {
+        localStorage.clear();
+        location.reload();
+    });
+};
 export { isLoggedIn, login, getUserFromLs };

@@ -9,7 +9,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { getUserFromLs } from "./users.js";
 import { getPosts } from "./posts.js";
-const commentsList = document.querySelector(".comments_list");
 export const addComment = (content, postId) => __awaiter(void 0, void 0, void 0, function* () {
     const user = getUserFromLs();
     const comment = {

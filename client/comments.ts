@@ -2,8 +2,6 @@ import { Comment } from "./interfaces"
 import { getUserFromLs } from "./users.js"
 import { getPosts } from "./posts.js"
 
-const commentsList = document.querySelector(".comments_list") as HTMLDivElement
-
 export const addComment = async (content: string, postId: string) => {
     const user = getUserFromLs()
 
